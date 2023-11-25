@@ -1,5 +1,4 @@
 let carouselIntervalId = null;
-let transitionDone = false;
 
 let defaultPropertyName = "The Splash";
 let defaultFamilyName = "Smiths Family";
@@ -8,14 +7,8 @@ let defaultCheckOutDate = "mm/dd/yyyy";
 
 window.onload = function () {
     window.rootStyle = getComputedStyle(document.body);
-    let divVideo = document.getElementById("videoBackground");
-    divVideo.oncanplay = function () {
-        if (transitionDone) {
-            return;
-        }
-        fillData();
-        startTransition();
-    };
+    fillData();
+    setTimeout(startTransition, 1000);
 };
 
 function fillData() {
@@ -144,7 +137,6 @@ function showQR(msPerFrame) {
         if (frameNum >= totalFrame) {
             clearInterval(animationIntervalId);
             divQRInner.style.bottom = divQRInnerFinalBottom + "%";
-            transitionDone = true;
             startCarousel(msPerFrame);
         } else {
             frameNum++;
